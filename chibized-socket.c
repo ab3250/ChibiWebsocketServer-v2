@@ -45,25 +45,31 @@ void onmessage(int fd, const unsigned char *msg, uint64_t size, int type)
 
 void init(void)
 {  
-   sexp ctx = ctx2;
+
+  sexp ctx = ctx2;
   struct ws_events evs;
   evs.onopen    = &onopen;
   evs.onclose   = &onclose;
   evs.onmessage = &onmessage;
-  sexp_gc_var3(arg_sym,arg_val,ret); 
-  sexp_gc_preserve3(ctx,arg_sym,arg_val,ret);
-  arg_sym = sexp_intern(ctx, "fp", -1);
-  arg_val = &evs;  
-  sexp_env_define(ctx,sexp_context_env(ctx), arg_sym, arg_val); 
-  ret=sexp_eval_string(ctx, "(init fp)", -1, NULL);
-  sexp_gc_release3(ctx);	
+  ws_socket(&evs, 8080, 1); /* Never returns. */
+//  sexp_gc_var3(arg_sym,arg_val,ret); 
+//  sexp_gc_preserve3(ctx,arg_sym,arg_val,ret);
+  // // arg_sym = sexp_intern(ctx, "fp", -1);
+  // // arg_val = &evs;  
+  // // sexp_env_define(ctx,sexp_context_env(ctx), arg_sym, arg_val); 
+  // // ret=sexp_eval_string(ctx, "(init fp)", -1, NULL);
+
+//  ret = sexp_eval_string(ctx, "(main)", -1, NULL);
+//  sexp_debug(ctx, "message: ", ret);
+//  sexp_print_exception(ctx, ret, SEXP_FALSE);
+//  sexp_gc_release3(ctx);	
   printf("Server Initialized!\n");  	
 }
 
 int ws_start(void){
  sexp ctx = ctx2;
- sexp_scheme_init();
- sexp_load_standard_env(ctx, NULL, SEXP_SEVEN);
+// sexp_scheme_init();
+// sexp_load_standard_env(ctx, NULL, SEXP_SEVEN);
 // sexp_load_standard_ports(ctx, NULL, stdin, stdout, stderr, 1);
  setbuf(stdout, NULL); 
  init();    

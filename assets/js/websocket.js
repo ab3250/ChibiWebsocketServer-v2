@@ -32,9 +32,9 @@ function loadWindow () {
     col[i].onclick = function (e) { mode(e.target.id) }
   })
 
-  //const interval = setInterval(function() {
-  //  ws.send("")    
-  //}, 1000)
+  const interval = setInterval(function() {
+    ws.send("test")    
+  }, 1000)
 }
   
 

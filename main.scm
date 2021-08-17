@@ -8,8 +8,8 @@
 (define port 8080)
 (define nonblocking 1)
 
-(define (init fp)   
-  (ws_socket fp port nonblocking))
+;(define (init fp)   
+;  (ws_socket fp port nonblocking))
 
 (define (delay sec)
     (define start (current-seconds))
